@@ -124,13 +124,14 @@ void lancerSimulationWeekendClassic(Course course, Pilote pilotes[], int taille_
     int shmid;
     SharedData* data = initialiser_mem_partagee(&shmid);
 
+
     // Initialiser les voitures à partir des pilotes
     for (int i = 0; i < taille_pilotes; i++) {
         init_voiture(&data->voitures[i], pilotes[i].number, pilotes[i].nickname);
     }
 
     // Lancer un weekend classique
-    gerer_weekend(CLASSIC, data, taille_pilotes, course.nb_laps, course.name);
+    gerer_weekend(CLASSIC, data, taille_pilotes, course, pilotes);
 
     // Libérer les ressources
     detacher_mem_partagee(data, shmid);
@@ -148,8 +149,8 @@ void lancerSimulationWeekendSpecial(Course course, Pilote pilotes[], int taille_
     }
 
     // Lancer un weekend spécial
-    gerer_weekend(SPECIAL, data, taille_pilotes, course.nb_laps, course.name);
-
+    gerer_weekend(SPECIAL, data, taille_pilotes, course, pilotes);
+    
     // Libérer les ressources
     detacher_mem_partagee(data, shmid);
 }
