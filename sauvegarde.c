@@ -33,7 +33,7 @@ void sauvegarderPilotesCSV(Pilote pilotes[], int taille, const char* filename) {
     }
 
     close(fd);
-    printf("Sauvegarde des pilotes terminée dans '%s'.\n", filename);
+    printf("\nSauvegarde des pilotes terminée dans '%s'.\n", filename);
 
 }
 
