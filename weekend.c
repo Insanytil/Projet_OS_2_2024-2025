@@ -24,18 +24,6 @@
 #define Q3_SPRINT 2
 
 
-
-
-// Permet d'attendre la validation de l'utilisateur avant de lancer la suite du programme 
-    // Attention parfois elle demande de n'appuyer qu'une fois parfois deux fois je n'arrive pas à débugger pour le moment
-void attendre_enter() {
-    int c;
-    printf("\nPress Enter to continue...\n");
-    while ((c = getchar()) != '\n' && c != EOF);
-    printf("\nPress Enter a second time to confirm...\n");
-    getchar();
-                          
-}
 // Permet d'afficher la tableau des meilleurs secteurs et du meilleurs tour
 void afficher_meilleurs_temps(SharedData* data) {
     printf("\n         |  Best S1  |  Best S2  |  Best S3  | Best Lap |\n");
@@ -541,7 +529,11 @@ void attribuer_points_post_course(Pilote pilotes[], SharedData* data) {
 
 // gérer une séance de sprint
 void gerer_seance_sprint(SharedData* data, int nb_voitures, Course course, Pilote pilotes[]) {
+    printf("\nEn attente du lancement du Sprint, appuyez sur une touche pour continuer...\n");
+    getchar(); // Attend une touche de l'utilisateur
+    
     printf("\nDébut de la séance sprint\n");
+    sleep(3);
     // trier_voitures_qualifs(data->voitures, nb_voitures);
     reinitialiser_voitures(data->voitures, nb_voitures, data);
 
@@ -806,9 +798,18 @@ void gerer_weekend(WeekendType type, SharedData* data, int nb_voitures, Course c
             default:
                 printf("Les qualifications pour le Sprint ont été ignorées.\n");
         }
-
-        printf("\nCourse Sprint (~100 km)\n");
-        gerer_seance_sprint(data, nb_voitures, course, pilotes);
+        printf("Voulez-vous lancer le Sprint ? [o/n]\n");
+        scanf(" %c", &choix);
+        switch(choix){
+            case 'o':
+            case 'O':
+                printf("\nCourse Sprint (~100 km)\n");
+                gerer_seance_sprint(data, nb_voitures, course, pilotes);
+                break;
+            default:
+                printf("Le sprint n'a pas eu lieu. Les pilotes ne recevront donc pas de points.");
+                break;
+        }
     }
 
     // Qualifications pour la course principale
@@ -857,9 +858,16 @@ void gerer_weekend(WeekendType type, SharedData* data, int nb_voitures, Course c
 
     // Jour 3 : Dimanche - Course principale
     printf("\n--- Jour 3 : Dimanche ---\n");
-    printf("Course principale\n");
-    gerer_seance_course(data, nb_voitures, course, pilotes);
-
+    printf("Voulez-vous lancer la course finale ? [o/n]\n");
+    scanf(" %c", &choix);
+    switch(choix) {
+        case 'o':
+        case 'O':
+            gerer_seance_course(data, nb_voitures, course, pilotes);
+            break;
+        default:
+            printf("\nLa course final n'a pas eu lieu. Les pilotes ne recevront donc pas de points\n");
+    }
     printf("Weekend terminé.\n");
 }
 
