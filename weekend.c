@@ -612,7 +612,7 @@ void gerer_seance_sprint(SharedData* data, int nb_voitures, Course course, Pilot
         afficher_classement_voiture_sprint(data->voitures, nb_voitures, data, tours_necessaires);
         usleep(250000); // Pause pour éviter trop de rafraîchissements
     }
-
+    trier_voitures_course(data->voitures, nb_voitures);
     // Session terminée : Trier et afficher les résultats finaux
     printf("\nSéance sprint terminée. Classement final :\n");
     afficher_classement_voiture_sprint(data->voitures, nb_voitures, data, tours_necessaires);
@@ -700,6 +700,7 @@ void gerer_seance_course(SharedData* data, int nb_voitures, Course course, Pilot
 
     // Session terminée : Trier et afficher les résultats finaux
     printf("\nSéance course terminée. Classement final :\n");
+    trier_voitures_course(data->voitures, nb_voitures);
     afficher_classement_voiture_sprint(data->voitures, nb_voitures, data, tours_total);
     enregistrer_resultat_course(course.name, data->voitures, nb_voitures, data);
     attribuer_points_post_course(pilotes, data);

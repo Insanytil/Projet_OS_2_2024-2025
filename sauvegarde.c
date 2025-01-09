@@ -209,14 +209,14 @@ void enregistrer_qualif_sprint(const char *nom_course, Voiture voitures[], int n
     // Ouvrir le fichier en mode écriture (création si inexistant, ajout sinon)
     int fd = open(filepath, O_WRONLY | O_CREAT | O_APPEND, 0644);
     if (fd < 0) {
-        perror("Erreur lors de l'ouverture du fichier");
+        perror("Erreur lors de l'ouverture du fichier durant la sauvegarde du classement de la qualification du sprint");
         return;
     }
 
     // Ajouter une ligne de séparation
     const char *separateur = "---------------------\n";
     if (write(fd, separateur, strlen(separateur)) < 0) {
-        perror("Erreur lors de l'écriture du séparateur");
+        perror("Erreur lors de l'écriture du séparateur durant la sauvegarde du classement de la qualification");
         close(fd);
         return;
     }
@@ -230,7 +230,7 @@ void enregistrer_qualif_sprint(const char *nom_course, Voiture voitures[], int n
              t->tm_hour, t->tm_min, t->tm_sec);            // Heure (heure:minute:seconde)
 
     if (write(fd, datetime, strlen(datetime)) < 0) {
-        perror("Erreur lors de l'écriture de la date et heure avec Practice n°");
+        perror("Erreur lors de l'écriture de la date et heure durant la sauvegarde du classement de la qualification");
         close(fd);
         return;
     }
@@ -258,7 +258,7 @@ void enregistrer_qualif_sprint(const char *nom_course, Voiture voitures[], int n
     // Ajouter les meilleurs temps par secteur (S1, S2, S3) et le meilleur temps global
     const char *header_meilleurs_temps = "\nMeilleurs temps par secteur et meilleur tour global :\n";
     if (write(fd, header_meilleurs_temps, strlen(header_meilleurs_temps)) < 0) {
-        perror("Erreur lors de l'écriture de l'en-tête des meilleurs temps");
+        perror("Erreur lors de l'écriture de l'en-tête des meilleurs temps durant la sauvegarde du classement de la qualification");
         close(fd);
         return;
     }
@@ -286,21 +286,21 @@ void enregistrer_qualif_sprint(const char *nom_course, Voiture voitures[], int n
              data->voiture_meilleur_temps); // Code pilote pour le meilleur tour global
 
     if (write(fd, ligne, strlen(ligne)) < 0) {
-        perror("Erreur lors de l'écriture des meilleurs temps");
+        perror("Erreur lors de l'écriture des meilleurs temps durant la sauvegarde du classement de la qualification");
         close(fd);
         return;
     }
 
     // Ajouter une ligne de séparation pour conclure
     if (write(fd, separateur, strlen(separateur)) < 0) {
-        perror("Erreur lors de l'écriture du séparateur final");
+        perror("Erreur lors de l'écriture du séparateur final durant la sauvegarde du classement de la qualification");
         close(fd);
         return;
     }
 
     // Fermer le fichier
     if (close(fd) < 0) {
-        perror("Erreur lors de la fermeture du fichier");
+        perror("Erreur lors de la fermeture du fichier durant la sauvegarde du classement de la qualification");
     } else {
         printf("Résultats sauvegardés dans %s\n", filepath);
     }
