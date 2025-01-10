@@ -44,12 +44,13 @@ Avant de compiler et d'exécuter ce projet, assurez-vous d'avoir :
 
 ## **Utilisation**
 1. **Lancer le programme**:
+   
    ```/simulation```
-2. **Menu Principal**:
+3. **Menu Principal**:
    - Créer un nouveau championnat : Charge les données de pilotes.csv et courses.csv.
    - Charger une sauvegarde existante: Charge un état sauvegardé à partir d'un fichier.
    - Quitter le programme.
-3. **Menu secondaire** (après avoir lancé un championnat)
+4. **Menu secondaire** (après avoir lancé un championnat)
     - Afficher le classement actuel.
     - Lancer un weekend de course (redirection vers un menu et le choix de la course).
     - Sauvegarder le championnat.
@@ -63,20 +64,20 @@ Avant de compiler et d'exécuter ce projet, assurez-vous d'avoir :
    - **sauvegarde.c / sauvegarde.h** : Gestion des sauvegardes
    - **weekend.c / weekend.h** : Coordination des étapes d'un week-end de course.
 ### **Données** :
-    - **pilotes.csv** : Données des pilotes (nom, prénoms, numéro...).
-    - **courses.csv** : Données des courses (nom, distance, pays...).
+   - **pilotes.csv** : Données des pilotes (nom, prénoms, numéro...).
+   - **courses.csv** : Données des courses (nom, distance, pays...).
 
 ## **Conception technique** :
 ### **Mémoire partagée** :
-    - Utilisée pour stocker les données des voitures lors des séances.
+   - Utilisée pour stocker les données des voitures lors des séances.
 ### **Sémaphore system v** :
-    - Utilisé pour vérouiller/dévérouiller l'accès à la mémoire partagée.
+   - Utilisé pour vérouiller/dévérouiller l'accès à la mémoire partagée.
 ### **Processus multiples** : 
    - Chaque voiture est simulée par un processus.
    - Le processus parent surveille les enfants et affiche régulièrement le classement.
 
 ### **AUTEUR**
-    - VERVAEREN Lucien
+   - VERVAEREN Lucien
 
 ### **LICENCE** :
    - Ce projet est sous licence MIT. Vous êtes libres de l'utiliser, le modifier, et le redistribuer sous les conditions de cette licence.
